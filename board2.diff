@@ -1,0 +1,21 @@
+114c114
+< 		for (int j=0; j<9; ++j)
+---
+>         for (int j=0; j<9; ++j)
+162a163,178
+> }
+> 
+> void
+> loadBoard(Board *b, char *filename)
+> {
+>     FILE *f = fopen(filename, "r");
+>     fread(b, sizeof(Board), 1, f);
+>     fclose(f);
+> }
+> 
+> void
+> saveBoard(Board *b, char *filename)
+> {
+>     FILE *f = fopen(filename, "w+");
+>     fwrite(b, sizeof(Board), 1, f);
+>     fclose(f);

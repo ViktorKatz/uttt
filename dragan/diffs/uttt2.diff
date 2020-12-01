@@ -1,0 +1,137 @@
+4a5,6
+> #include <unistd.h>
+> #include <ncurses.h>
+6,7c8,10
+< #include "AI.h"
+< #include "board.h"
+---
+> #include "AI.c"
+> #include "board.c"
+> #include "cli.c"
+11c14,37
+< static void writeMove(int player, int move)
+---
+> 
+> 
+> static void writeMove(int player, int move);
+> 
+> static const char *usage =
+> "\nUsage : ./uttt p1 p2 [a t1 t2]\n\n\
+>  p1 - player 1 type\n\
+>  p2 - player 2 type\n\
+>  a  - auto restart (1 for yes, 0 for no)\n\
+>  t1 - time for the player 1 in seconds (doesn't affect human)\n\
+>  t2 - time for the player 2 in seconds (doesn't affect human)\n\n\
+>  player types:\n\
+>  0 - human (arrows, wasd or vim keys for movement, enter for playing move,\
+>  ? for hint, o for save, i for load)\n\
+>  1 - easy\n\
+>  2 - medium\n\
+>  3 - hard\n\
+>  4 - insane\n\
+>  5 - Reading a move from file.txt\n\n\
+>  example: ./uttt 4 3 1 0.1 0.1\n\n\
+>  for more info read the code\n";
+> 
+> void
+> writeMove(int player, int move)
+18c44
+< // mozda bi mogla vecina ovoga da se potrpa u neki update() i setup()
+---
+> /* mozda bi mogla vecina ovoga da se potrpa u neki update() i setup() */
+23c49
+<     int player=1, cX=6, cY=5, p1=0, p2=0, autoRestart=0;
+---
+>     int player=1, cX=6, cY=5, p1=4, p2=3, autoRestart=0;
+31,35c57,63
+<     // nemamo main manu zato sto sta ce nam
+<     if (argc>1)
+<         p1=atoi(argv[1]);
+<     if (argc>2)
+<         p2=atoi(argv[2]);
+---
+>     /* nemamo main manu zato sto sta ce nam */
+>     if (argc<3) {
+>         puts(usage);
+>         return 0;
+>     }
+>     p1=atoi(argv[1]);
+>     p2=atoi(argv[2]);
+46c74
+< 	/*
+---
+> 
+54c82
+<     }*/
+---
+>     }
+57,58c85,86
+<         //if (CLI) cliDrawBoard(board);
+<         /*else */drawBoard(board);
+---
+>         if (CLI) cliDrawBoard(board);
+>         else drawBoard(board);
+61c89
+<         // odigravanje poteza
+---
+>         /* odigravanje poteza */
+65,66c93,94
+<                 //if (CLI)
+<                     //cliPlayerMove(board, 1, &cY, &cX);
+---
+>                 if (CLI)
+>                     cliPlayerMove(board, 1, &cY, &cX);
+69c97
+<                 randomMove(board, 1);
+---
+>                 AIMinimaxMove(board, 1, time1, 4, 2);          /* easy */
+73c101
+<                 AIMove1(board, 1, time1);
+---
+>                 AIMinimaxMove(board, 1, time1, 4, 5);          /* medium */
+77c105
+<                 mct1=AIMonteCarloMove2(board, 1, mct1, time1);
+---
+>                 AIMinimaxMove(board, 1, time1, 4, 100);        /* hard */
+81c109
+<                 AIMinimaxMove(board, 1, time1, 4);
+---
+>                 mct1=AIMonteCarloMove2(board, 1, mct1, time1); /* insane */
+92,93c120,121
+<                 //if (CLI)
+<                     //cliPlayerMove(board, 2, &cY, &cX);
+---
+>                 if (CLI)
+>                     cliPlayerMove(board, 2, &cY, &cX);
+96c124
+<                 randomMove(board, 2);
+---
+>                 AIMinimaxMove(board, 2, time2, 4, 2);          /* easy */
+100c128
+<                 AIMove1(board, 2, time2);
+---
+>                 AIMinimaxMove(board, 2, time2, 4, 5);          /* medium */
+104c132
+<                 mct2=AIMonteCarloMove2(board, 2, mct2, time2);
+---
+>                 AIMinimaxMove(board, 2, time2, 4, 100);        /* hard */
+108c136
+<                 AIMinimaxMove(board, 2, time2, 4);
+---
+>                 mct2=AIMonteCarloMove2(board, 2, mct2, time2); /* insane */
+117c145
+<         //if (CLI) mvprintw(8, 15, "%lf", 1.0*(clock()-start)/CLOCKS_PER_SEC);
+---
+>         if (CLI) mvprintw(10, 15, "%lf", 1.0*(clock()-start)/CLOCKS_PER_SEC);
+124c152
+<             /*if (CLI) {
+---
+>             if (CLI) {
+134c162
+<             }*/
+---
+>             }
+138c166
+<             //if (CLI) cX=6, cY=5;
+---
+>             if (CLI) cX=6, cY=5;

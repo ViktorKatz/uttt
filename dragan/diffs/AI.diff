@@ -1,0 +1,40 @@
+6,7c6,7
+< #include "AI.h"
+< #include "board.h"
+---
+> #include "AI.c"
+> #include "board.c"
+9c9,10
+< #define FILENAME "file.txt"
+---
+> #define IN "out.out"
+> #define OUT "in.in"
+13,14c14,15
+<     FILE *f=fopen(FILENAME, "w+");
+<     fprintf(f, "%d %d %d", player, move/9, move%9);
+---
+>     FILE *f=fopen(OUT, "w+");
+>     fprintf(f, "%d %d", move%9+1, move/9+1);
+23,24c24,25
+<     int player=1, cX=6, cY=5, p1=0, p2=0, autoRestart=0;
+<     double time1=1, time2=1;
+---
+>     int player=1, cX=6, cY=5, p1=5, p2=3, autoRestart=0;
+>     double time1=5, time2=5;
+32,43c33
+<     if (argc>1)
+<         p1=atoi(argv[1]);
+<     if (argc>2)
+<         p2=atoi(argv[2]);
+<     if (argc>3)
+<         autoRestart=atoi(argv[3]);
+<     if (argc>4)
+<         time1=atof(argv[4]);
+<     if (argc>5)
+<         time2=atof(argv[5]);
+< 
+<     board=calloc(1, sizeof(Board));
+---
+>     board= (Board *) calloc(1, sizeof(Board));
+58d47
+<         /*else */drawBoard(board);

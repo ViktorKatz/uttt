@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1560334747 source:c:\users\vikto\onedrive\documents\asp\dragan\ai.c
+	<time.h>
+	<stdlib.h>
+	<math.h>
+	<stdio.h>
+	<string.h>
+	"board.h"
+	"AI.h"
+
+1560197749 c:\users\vikto\onedrive\documents\asp\dragan\board.h
+
+1560183627 c:\users\vikto\onedrive\documents\asp\dragan\ai.h
+	"board.h"
+
+1560197752 source:c:\users\vikto\onedrive\documents\asp\dragan\board.c
+	<stdio.h>
+	<stdlib.h>
+	"board.h"
+
+1560338192 source:c:\users\vikto\onedrive\documents\asp\dragan\uttt.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+	"windows.h"
+	"AI.h"
+	"board.h"
+	<SDL.h>
+	<SDL_ttf.h>
+	<math.h>
+	<string.h>
+
+1547325881 c:\users\vikto\onedrive\documents\asp\dragan\sdl_ttf\i686-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+

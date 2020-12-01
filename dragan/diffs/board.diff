@@ -1,0 +1,8 @@
+23c23
+<     res=calloc(count+1, sizeof(int));
+---
+>     res= (int *)calloc(count+1, sizeof(int));
+35c35
+<     Board *b2=calloc(1, sizeof(Board));
+---
+>     Board *b2= (Board *) calloc(1, sizeof(Board));
